@@ -10,25 +10,26 @@ import urllib.parse
 from glob import glob
 
 # Twitter security codes
-access_token = '1373668246012891141-lvZbkBZK4yLXkwDh7rnwFXqXLnkl6B'
-access_token_secret = 'zeLjaaWcczN4elYRdl0QzXyfUB7UI7RJy9SCTbuydoLIh'
-consumer_key = '6AIvnKFInAYisAQwRA8oEyXjx'
-consumer_secret = 'WBceYTz98VHQUxg0PwtVLqzCVzfrMjO72CL0Z4j3tt7OL9dgQE'
+#Enter your security codes here
+access_token = ' '
+access_token_secret = ' '
+consumer_key = ' '
+consumer_secret = ' '
 
-# Options to customize your bot
-subreddit_name = "Genshin_Memepact"
-tag_string = "#GenshinImpact #原神 #Genshin #Genshinmemes #GenshinImpactMemes"
-num_tweets_before_stopping = 144
-tweet_delay = 20  # in minutes
+#Enter subreddit name and hashtags to be used in tweets
+#Enter time delay between each tweet
+subreddit_name = " "
+tag_string = "#twitterbot"
+num_tweets_before_stopping = 20
+tweet_delay = 5  # in minutes
 
-# Place the name of the folder where the images are downloaded
+#name of the folder to download images
 IMAGE_DIR = 'img'
 
-# Core functions begin here
+#main functions
 
-
+#cut off excess text
 def strip_title(title, tag_len):
-    # 26 = 24 for link + 2 for the spaces between concatenated strings
     char_remaining = 240-tag_len-26
     if len(title) <= char_remaining:
         return title
@@ -37,7 +38,7 @@ def strip_title(title, tag_len):
     else:
         return ""
 
-
+#fetch image
 def get_image(img_url):
     if 'redd.it' in img_url:
         file_name = os.path.basename(urllib.parse.urlsplit(img_url).path)
@@ -81,11 +82,12 @@ def tweet_creator(subreddit_info):
 
 def setup_connection_reddit(subreddit):
     print("[bot] setting up connection with Reddit")
-    r = praw.Reddit(user_agent='Reposter ', client_id='4bTQ45PvkII_4w',
-                    client_secret='D20pTyh-Xn_w-XsBJ3M60HiOo22fDg')
-    return r.subreddit('Genshin_Memepact')
+    #enter your reddit keys here
+    r = praw.Reddit(user_agent='Reposter ', client_id=' ',
+                    client_secret=' ')
+    return r.subreddit('subreddit_name_here')
 
-
+#check for duplicate posts
 def duplicate_check(id):
     found = 0
     with open('posted_posts.txt', 'r') as file:
@@ -95,7 +97,7 @@ def duplicate_check(id):
     file.close()
     return found
 
-
+#add id for posted posts
 def add_id_to_file(id):
     with open('posted_posts.txt', 'a') as file:
         file.write(str(id) + "\n")
