@@ -62,6 +62,13 @@ def tweet_creator(subreddit_info):
     post_authors = []
     post_imgs = []
     print("[bot] Getting posts from Reddit")
+    ''' Usage
+    -> .hot() - sorts by hot
+    -> .top() - sorts by top
+        ->.top("day") - sorts by top of the day
+        ->.top("all") - sorts by top posts of all time
+    -> .new() - sorts by new
+    '''
     for submission in subreddit_info.hot(limit=100):
         post_id = submission.id
         post_link = submission.url
